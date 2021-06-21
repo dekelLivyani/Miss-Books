@@ -1,4 +1,5 @@
 import bookApp from './pages/book-app.js'
+import userMsg from './cmps/user-msg.js';
 import bookHeader from './cmps/book-header.js';
 import bookFooter from './cmps/book-footer.js';
 import { router } from './router.js';
@@ -9,6 +10,7 @@ const options = {
     template: `
        <section>
           <div class="wrapper">
+          <user-msg />
           <book-header />
           <router-view />
           </div>
@@ -18,7 +20,8 @@ const options = {
     components: {
         bookApp,
         bookHeader,
-        bookFooter
+        bookFooter,
+        userMsg
     }
 };
 

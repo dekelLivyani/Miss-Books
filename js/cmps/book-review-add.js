@@ -2,8 +2,8 @@ export default {
     template: `
   <form class="book-review-add"  @submit.prevent="addReview">
      <div class="name-container">
-      <label for="name-inp">Full Name: </label>
-      <input id="name-inp" v-model="review.name" type="text" placeholder="Name..."/>
+      <label  for="name-inp">Full Name: </label>
+      <input ref="name" id="name-inp" v-model="review.name" type="text" placeholder="Name..."/>
       </div>
       <div class="rate-container">
       <label for="rate">Rate: </label>
@@ -29,6 +29,9 @@ export default {
                 reviewText: null
             }
         }
+    },
+    mounted() {
+        this.$refs.name.focus();
     },
     methods: {
         addReview() {

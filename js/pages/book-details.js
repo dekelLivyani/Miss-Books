@@ -2,6 +2,7 @@ import bookDescription from '../cmps/book-description.js'
 import bookReviewAdd from '../cmps/book-review-add.js'
 import bookReviewsList from '../cmps/book-reviews-list.js'
 import { bookService } from '../services/book-service.js'
+import { eventBus } from '../services/event-bus-service.js'
 
 export default {
     components: {
@@ -57,7 +58,24 @@ export default {
         },
         addReview(review) {
             this.isAddReview = false
+
             bookService.addReview(this.book, review)
+                .then(() => {
+
+                    const msg = {
+                        txt: 'Review Added!',
+                        type: 'success'
+                    }
+                    eventBus.$emit('show-msg', msg);
+                })
+                .catch(err => {
+                    console.log(err);
+                    const msg = {
+                        txt: 'Error, please try again later',
+                        type: 'error'
+                    }
+                    eventBus.$emit('show-msg', msg);
+                });
         }
     },
     computed: {

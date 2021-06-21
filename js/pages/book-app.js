@@ -1,28 +1,23 @@
 import { bookService } from '../services/book-service.js';
 import bookFilter from '../cmps/book-filter.js';
 import bookList from '../cmps/book-list.js';
-import bookDetails from './book-details.js';
 
 export default {
     template: `
     <main>
-      <book-filter  v-if="!selectBook"  @filtered="setFilter"/>
-      <book-list v-if="!selectBook" :books="booksToShow" @selectBook="setBookSelected"/>
-      <book-details v-else :book="selectBook" @goBack="goBack" @clickRead="clickRead"/>
+      <book-filter  @filtered="setFilter"/>
+      <book-list :books="booksToShow"/>
 </main>
 `,
     data() {
         return {
             books: null,
             filterBy: null,
-            selectBook: null,
-            isLongText: false,
         }
     },
     components: {
         bookFilter,
         bookList,
-        bookDetails,
     },
     created() {
         bookService.query()
@@ -30,24 +25,12 @@ export default {
 
     },
     methods: {
-        setBookSelected(bookId) {
-            const book = this.books.find(book => book.id === bookId)
-            this.selectBook = book;
-            this.filterBy = null;
-        },
-        goBack() {
-            this.selectBook = null;
-        },
-        clickRead(ReadStatus) {
-            this.isLongText = ReadStatus;
-        },
         setFilter(filterBy) {
             this.filterBy = filterBy;
         }
     },
     computed: {
         booksToShow() {
-
             if (!this.filterBy || !this.filterBy.name && !this.filterBy.from && !this.filterBy.until) return this.books;
             var bookToShow = [];
             if (this.filterBy.name) {

@@ -1,10 +1,14 @@
 import bookDescription from '../cmps/book-description.js'
+import bookReviewAdd from '../cmps/book-review-add.js'
+import bookReviewsList from '../cmps/book-reviews-list.js'
 import { bookService } from '../services/book-service.js'
 
 export default {
     components: {
         bookDescription,
         bookService,
+        bookReviewAdd,
+        bookReviewsList,
     },
     template: `
     <div class="book-details" v-if="book">
@@ -22,14 +26,21 @@ export default {
             <img class="sale-img" src="imgs/SALE.png" v-if="book.listPrice.isOnSale"/>
             <img class="book-img" :src="book.thumbnail"/>
             <p class="description"><span class="subtitle">Description:</span>
-             <book-description :desc="book.description"/> </p>
-
-         <button @click="goBack"> Back</button>
+            <book-description :desc="book.description"/> </p>
+            <div class="reviews-container">
+               <book-review-add v-if="isAddReview" @addReview="addReview" />
+               <book-reviews-list v-else :reviews="book.reviews"/>
+            </div>
+            <div class="buttons" :class="classToButtons">
+            <button @click="clickAddReview" v-if="!isAddReview"> Add Review</button>
+            <button class="go-back" @click="goBack"> Back</button>
+            </div>
     </div>
   `,
     data() {
         return {
-            book: null
+            book: null,
+            isAddReview: false
         }
     },
     created() {
@@ -40,9 +51,19 @@ export default {
     methods: {
         goBack() {
             this.$router.push('/book');
+        },
+        clickAddReview() {
+            this.isAddReview = true;
+        },
+        addReview(review) {
+            this.isAddReview = false
+            bookService.addReview(this.book, review)
         }
     },
     computed: {
+        classToButtons() {
+            return { justifyEnd: this.isAddReview }
+        },
         formatCurrency() {
             return (new Intl.NumberFormat(this.book.listPrice.currencyCode, { style: 'currency', currency: this.book.listPrice.currencyCode }).format(this.book.listPrice.amount));
         },

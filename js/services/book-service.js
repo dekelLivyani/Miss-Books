@@ -7,6 +7,7 @@ const gBooks = _CreateBooks();
 export const bookService = {
     query,
     getById,
+    addReview,
 };
 
 function query() {
@@ -15,6 +16,13 @@ function query() {
 
 function getById(id) {
     return storageService.get(BOOKS_KEY, id);
+}
+
+function addReview(book, review) {
+    console.log(book);
+    if (!review.name) review.name = 'Books Reader';
+    book.reviews.push(review);
+    return storageService.put(BOOKS_KEY, book);
 }
 
 function _CreateBooks() {
@@ -40,7 +48,13 @@ function _CreateBooks() {
                     "amount": 109,
                     "currencyCode": "EUR",
                     "isOnSale": false
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "JYOJa2NpSCq",
@@ -62,7 +76,13 @@ function _CreateBooks() {
                     "amount": 44,
                     "currencyCode": "EUR",
                     "isOnSale": true
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "1y0Oqts35DQ",
@@ -84,7 +104,13 @@ function _CreateBooks() {
                     "amount": 108,
                     "currencyCode": "ILS",
                     "isOnSale": false
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "kSnfIJyikTP",
@@ -106,7 +132,13 @@ function _CreateBooks() {
                     "amount": 30,
                     "currencyCode": "EUR",
                     "isOnSale": true
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "f4iuVmbuKCC",
@@ -128,7 +160,13 @@ function _CreateBooks() {
                     "amount": 19,
                     "currencyCode": "USD",
                     "isOnSale": false
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "U2rfZO6oBZf",
@@ -150,7 +188,13 @@ function _CreateBooks() {
                     "amount": 91,
                     "currencyCode": "USD",
                     "isOnSale": true
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "xI0wrXaaAcq",
@@ -172,7 +216,13 @@ function _CreateBooks() {
                     "amount": 90,
                     "currencyCode": "USD",
                     "isOnSale": false
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "9laHCEdSpFy",
@@ -194,7 +244,13 @@ function _CreateBooks() {
                     "amount": 176,
                     "currencyCode": "EUR",
                     "isOnSale": false
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "nGhVwZvGCGp",
@@ -216,7 +272,13 @@ function _CreateBooks() {
                     "amount": 116,
                     "currencyCode": "USD",
                     "isOnSale": true
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "Q8Q9Lsd03BD",
@@ -238,7 +300,13 @@ function _CreateBooks() {
                     "amount": 145,
                     "currencyCode": "EUR",
                     "isOnSale": false
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "bd7a76kARao",
@@ -260,7 +328,13 @@ function _CreateBooks() {
                     "amount": 157,
                     "currencyCode": "ILS",
                     "isOnSale": true
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "qKyG0vqeO3e",
@@ -282,7 +356,13 @@ function _CreateBooks() {
                     "amount": 57,
                     "currencyCode": "USD",
                     "isOnSale": true
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "2RvT48ZNInj",
@@ -304,7 +384,13 @@ function _CreateBooks() {
                     "amount": 167,
                     "currencyCode": "ILS",
                     "isOnSale": false
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "5z2s9pDXAYj",
@@ -326,7 +412,13 @@ function _CreateBooks() {
                     "amount": 150,
                     "currencyCode": "USD",
                     "isOnSale": true
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "zBZu5cDEWha",
@@ -348,7 +440,13 @@ function _CreateBooks() {
                     "amount": 58,
                     "currencyCode": "ILS",
                     "isOnSale": true
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "aOI7tQuPZ2f",
@@ -370,7 +468,13 @@ function _CreateBooks() {
                     "amount": 78,
                     "currencyCode": "USD",
                     "isOnSale": false
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "WBooB82Uvwu",
@@ -392,7 +496,13 @@ function _CreateBooks() {
                     "amount": 118,
                     "currencyCode": "ILS",
                     "isOnSale": false
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "xm1z5bbZjlS",
@@ -414,7 +524,13 @@ function _CreateBooks() {
                     "amount": 60,
                     "currencyCode": "EUR",
                     "isOnSale": false
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "u3j6QIKLlJb",
@@ -436,7 +552,13 @@ function _CreateBooks() {
                     "amount": 110,
                     "currencyCode": "USD",
                     "isOnSale": true
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             },
             {
                 "id": "vxYYYdVlEH3",
@@ -458,7 +580,13 @@ function _CreateBooks() {
                     "amount": 186,
                     "currencyCode": "ILS",
                     "isOnSale": true
-                }
+                },
+                reviews: [{
+                    name: 'Dani',
+                    rate: 2,
+                    createAt: 1624278660418,
+                    reviewText: 'its a Good Book😍'
+                }]
             }
         ]
         utilService.save(BOOKS_KEY, books);

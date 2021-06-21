@@ -5,14 +5,20 @@ export default {
          <p  class="title">{{book.title}} </p>
          <img class="img-book" :src="book.thumbnail"/>
          <p class="price">Price: 
-            <span>{{formatCurrency}}</span>
+            <span :class="basedClasses">{{formatCurrency}}</span>
             <img class="sale-list-img" src="imgs/SALE.png" v-if="book.listPrice.isOnSale"/></p>
     </div>
  `,
-    methods: {},
+    methods: {
+
+    },
     computed: {
         formatCurrency() {
-            return (new Intl.NumberFormat(this.book.listPrice.currencyCode, { style: 'currency', currency: this.book.listPrice.currencyCode }).format(this.book.listPrice.amount));
-        }
+            return this.book.listPrice.amount.toLocaleString('us-US', { style: 'currency', currency: this.book.listPrice.currencyCode })
+                // return (new Intl.NumberFormat(this.book.listPrice.currencyCode, { style: 'currency', currency: this.book.listPrice.currencyCode }).format(this.book.listPrice.amount));
+        },
+        basedClasses() {
+            return { red: this.book.listPrice.amount > 150, green: this.book.listPrice.amount < 20 }
+        },
     }
 };

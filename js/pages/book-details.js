@@ -1,7 +1,7 @@
 import bookDescription from '../cmps/book-description.js'
 
 export default {
-    props: ['book', 'isReedMore'],
+    props: ['book'],
     components: {
         bookDescription,
     },
@@ -23,19 +23,9 @@ export default {
             <p class="description"><span class="subtitle">Description:</span>
              <book-description :desc="book.description"/> </p>
 
-         <button @click="goBack"> Back</button>
+         <button @click="$emit('goBack')"> Back</button>
     </div>
   `,
-    data() {
-        return {
-            reedMore: this.isReedMore,
-        }
-    },
-    methods: {
-        goBack() {
-            this.$emit('goBack');
-        },
-    },
     computed: {
         formatCurrency() {
             return (new Intl.NumberFormat(this.book.listPrice.currencyCode, { style: 'currency', currency: this.book.listPrice.currencyCode }).format(this.book.listPrice.amount));

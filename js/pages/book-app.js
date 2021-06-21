@@ -8,7 +8,7 @@ export default {
     <main>
       <book-filter  v-if="!selectBook"  @filtered="setFilter"/>
       <book-list v-if="!selectBook" :books="booksToShow" @selectBook="setBookSelected"/>
-      <book-details v-else :book="selectBook,isReedMore" @goBack="goBack" @clickRead="clickRead"/>
+      <book-details v-else :book="selectBook" @goBack="goBack" @clickRead="clickRead"/>
 </main>
 `,
     data() {
@@ -16,7 +16,7 @@ export default {
             books: bookService.query(),
             filterBy: null,
             selectBook: null,
-            isReedMore: false,
+            isLongText: false,
         }
     },
     components: {
@@ -34,7 +34,7 @@ export default {
             this.selectBook = null;
         },
         clickRead(ReadStatus) {
-            this.isReedMore = ReadStatus;
+            this.isLongText = ReadStatus;
         },
         setFilter(filterBy) {
             this.filterBy = filterBy;
@@ -54,13 +54,13 @@ export default {
             var copyArray = (bookToShow.length) ? bookToShow.slice() : this.books;
             if (this.filterBy.from) {
                 bookToShow = copyArray.filter(book => {
-                    return book.listPrice.amount > +this.filterBy.from
+                    return book.listPrice.amount > this.filterBy.from
                 })
             }
             var copyArray1 = (bookToShow.length) ? bookToShow.slice() : this.books;
             if (this.filterBy.until) {
                 bookToShow = copyArray1.filter(book => {
-                    return book.listPrice.amount < +this.filterBy.until
+                    return book.listPrice.amount < this.filterBy.until
                 })
             }
             return bookToShow;

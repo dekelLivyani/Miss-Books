@@ -1,12 +1,13 @@
 import bookDescription from '../cmps/book-description.js'
+import { bookService } from '../services/book-service.js'
 
 export default {
-    props: ['book'],
     components: {
         bookDescription,
+        bookService,
     },
     template: `
-    <div class="book-details">
+    <div class="book-details" v-if="book">
          <p  class="title">{{book.title}} </p>
          <p  class="subtitle-book">{{book.subtitle}} </p>
          <p  class="authors" v-for="(author,idx) in book.authors" :key="idx"><span class="subtitle">Author:</span> {{author}}</p>
@@ -23,9 +24,24 @@ export default {
             <p class="description"><span class="subtitle">Description:</span>
              <book-description :desc="book.description"/> </p>
 
-         <button @click="$emit('goBack')"> Back</button>
+         <button @click="goBack"> Back</button>
     </div>
   `,
+    data() {
+        return {
+            book: null
+        }
+    },
+    created() {
+        const { bookId } = this.$route.params;
+        bookService.getById(bookId)
+            .then(book => this.book = book)
+    },
+    methods: {
+        goBack() {
+            this.$router.push('/book');
+        }
+    },
     computed: {
         formatCurrency() {
             return (new Intl.NumberFormat(this.book.listPrice.currencyCode, { style: 'currency', currency: this.book.listPrice.currencyCode }).format(this.book.listPrice.amount));

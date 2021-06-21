@@ -11,7 +11,7 @@ export default {
   `,
     methods: {
         clickBook(bookId) {
-            this.$emit('selectBook', bookId)
+            this.$router.push(`/book/${bookId}`)
         }
     },
     components: {

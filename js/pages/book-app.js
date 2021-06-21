@@ -13,7 +13,7 @@ export default {
 `,
     data() {
         return {
-            books: bookService.query(),
+            books: null,
             filterBy: null,
             selectBook: null,
             isLongText: false,
@@ -23,6 +23,11 @@ export default {
         bookFilter,
         bookList,
         bookDetails,
+    },
+    created() {
+        bookService.query()
+            .then(books => this.books = books)
+
     },
     methods: {
         setBookSelected(bookId) {

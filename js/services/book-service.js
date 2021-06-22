@@ -2,7 +2,7 @@ import { utilService } from './util-service.js';
 import { storageService } from './async-storage-service.js';
 
 const BOOKS_KEY = 'books';
-const SEARCHES = utilService.load('Searches') || {};
+const searches = utilService.load('Searches') || {};
 
 export const bookService = {
     query,
@@ -594,13 +594,13 @@ function addReview(book, review) {
 }
 
 function getBooksFromGoogle(title) {
-    if (SEARCHES[title]) return Promise.resolve(SEARCHES[title]);
+    if (searches[title]) return Promise.resolve(searches[title]);
     const URL = `https://www.googleapis.com/books/v1/volumes?printType=books&q=${title}&country=us`
     return axios.get(URL)
         .then(res => {
             console.log('load from axios');
-            SEARCHES[title] = res.data;
-            utilService.save('Searches', SEARCHES)
+            searches[title] = res.data;
+            utilService.save('searches', searches)
             return res.data;
         })
         .catch(err => console.log('error:', err))

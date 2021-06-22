@@ -4,7 +4,7 @@ export default {
     props: ['books'],
     template: `
      <ul class="book-google-list" > 
-     <li class="tttt" v-for="book in books" :key="book.id">  
+     <li v-for="book in books" :key="book.id">  
          <book-google-preview :book="book"/>
       </li>
      </ul>`,

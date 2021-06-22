@@ -6,19 +6,13 @@ export default {
     template: `
    <section class="book-google-search">
       Add book : 
-      <input type="text" v-model="title" placeholder="name of book" list="list">
-      <datalist id="list">
-         <option>Harry Potter</option>
-         <option>Batman</option>
-         <option>Dora</option>
-      </datalist>
+      <input type="text" v-model="title" placeholder="name of book">
       <button class="search" @click="getBooks">Search</button>
       <book-google-list v-if="books" :books="books"/>
       <button class="close" v-if="books" @click="closeSearch"> X</button>
    </section>`,
     components: {
         bookGoogleList,
-        bookService
     },
     data() {
         return {

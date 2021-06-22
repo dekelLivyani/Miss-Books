@@ -14,6 +14,7 @@ export default {
       <option>4</option>
       <option>5</option>
       </select>
+      <button class="close-add-review" @click="closeAdd">X</button>
       </div>
       <label class="textarea-label" for="textarea">Your Review: </label>
     <textarea id="textarea" v-model="review.reviewText" placeholder="Your Review..."></textarea>
@@ -37,6 +38,9 @@ export default {
         addReview() {
             this.review.createAt = this.getDisplayTime;
             this.$emit('addReview', this.review)
+        },
+        closeAdd() {
+            this.$emit('closeAdd')
         }
     },
     computed: {

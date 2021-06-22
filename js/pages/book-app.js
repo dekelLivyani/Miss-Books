@@ -1,11 +1,12 @@
 import { bookService } from '../services/book-service.js';
 import bookFilter from '../cmps/book-filter.js';
 import bookList from '../cmps/book-list.js';
-
+import bookGoogleSearch from '../cmps/book-google-search.js';
 export default {
     template: `
     <main>
       <book-filter  @filtered="setFilter"/>
+      <book-google-search/>
       <book-list :books="booksToShow"/>
 </main>
 `,
@@ -18,6 +19,7 @@ export default {
     components: {
         bookFilter,
         bookList,
+        bookGoogleSearch,
     },
     created() {
         bookService.query()

@@ -31,7 +31,7 @@ export default {
           
             <book-description :desc="book.description"/> </p>
             <div class="reviews-container">
-               <book-review-add v-if="isAddReview" @addReview="addReview" />
+               <book-review-add v-if="isAddReview" @addReview="addReview" @closeAdd="closeAddReview" />
                <book-reviews-list v-else :reviews="book.reviews"/>
             </div>
             <div class="buttons" :class="classToButtons">
@@ -54,6 +54,9 @@ export default {
     methods: {
         goBack() {
             this.$router.push('/book');
+        },
+        closeAddReview() {
+            this.isAddReview = false;
         },
         clickAddReview() {
             this.isAddReview = true;

@@ -220,6 +220,8 @@ nav .router-link-exact-active {
     flex-wrap: wrap;
     gap: 25px;
     list-style: none;
+    justify-content: center;
+    padding: 0;
 }
 
 
@@ -768,6 +770,11 @@ nav .router-link-exact-active {
         color: black;
     }
     .btn-menu {
+        margin-right: 15px;
+        border: 0;
+        background-color: unset;
+        color: red;
+        font-size: 2rem;
         display: inline-block;
     }
     .home-page {
@@ -823,24 +830,15 @@ nav .router-link-exact-active {
         width: 115px;
     }
     .book-preview {
-        width: 350px;
-        height: 355px;
-        box-shadow: 0 0 0 2px rgb(160, 147, 147);
-        border-radius: 15px;
-        padding: 10px;
-        text-align: center;
-        cursor: pointer;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-        gap: 5px;
+        width: 345px;
     }
 }
 
 @media (max-width:450px) {
     .book-details {
         gap: 10px;
+    }
+    .book-preview {
+        width: 270px;
     }
 }

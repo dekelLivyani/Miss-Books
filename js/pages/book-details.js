@@ -24,6 +24,8 @@ export default {
          <p  class="language"><span class="subtitle">language:</span> {{book.language}} </p>
          <p class="price"><span class="subtitle">Price:</span> 
             <span :class="basedClasses">{{formatCurrency}}</span></p>
+            <router-link class="prev-book" :to="'/book/' +prevBookId">⬅ Prev Book </router-link> 
+            <router-link class="next-book" :to="'/book/' +nextBookId">Next Book ➡ </router-link> 
            
             <img class="sale-img" src="imgs/SALE.png" v-if="book.listPrice.isOnSale"/>
             <img class="book-img" :src="book.thumbnail"/>
@@ -43,13 +45,24 @@ export default {
     data() {
         return {
             book: null,
-            isAddReview: false
+            isAddReview: false,
+            prevBookId: null,
+            nextBookId: null
         }
     },
-    created() {
-        const { bookId } = this.$route.params;
-        bookService.getById(bookId)
-            .then(book => this.book = book)
+    watch: {
+        '$route.params.bookId': {
+            immediate: true,
+            handler() {
+                const { bookId } = this.$route.params;
+                bookService.getById(bookId)
+                    .then(book => this.book = book);
+                bookService.getNeighborById(bookId, 1)
+                    .then(nextBook => this.nextBookId = nextBook)
+                bookService.getNeighborById(bookId, -1)
+                    .then(prevBook => this.prevBookId = prevBook)
+            }
+        }
     },
     methods: {
         goBack() {

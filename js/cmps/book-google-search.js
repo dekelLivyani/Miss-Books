@@ -44,9 +44,24 @@ export default {
         addBook(book) {
             bookService.addBook(book)
                 .then(book => {
+                    const msg = {
+                        txt: 'Your book added!',
+                        type: 'success'
+                    }
+                    console.log('yes!');
                     this.closeSearch();
+                    eventBus.$emit('show-msg', msg);
                     this.$emit('bookAdded')
                 })
+                .catch(err => {
+                    const msg = {
+                        txt: 'Error, please try again later',
+                        type: 'error'
+                    }
+                    this.closeSearch();
+                    eventBus.$emit('show-msg', msg);
+                });
+
         }
     }
 }

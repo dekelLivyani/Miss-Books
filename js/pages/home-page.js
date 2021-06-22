@@ -1,7 +1,8 @@
 export default {
     template: `
        <section class="home-page">
-           <h2>Home sweet home</h2>
+           <h1 class="welcome">Welcome to our book Story!</h1>
+           <img src="imgs/books-homePage.png"/>
        </section>
    `
 }

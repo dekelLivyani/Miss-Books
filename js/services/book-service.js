@@ -10,6 +10,7 @@ export const bookService = {
     addReview,
     getBooksFromGoogle,
     addBook,
+    getNeighborById
 };
 
 function query() {
@@ -604,6 +605,18 @@ function getBooksFromGoogle(title) {
         })
         .catch(err => console.log('error:', err))
 }
+
+function getNeighborById(id, deff) {
+    return storageService.query(BOOKS_KEY)
+        .then(books => {
+            const bookIdx = books.findIndex(book => book.id === id);
+            if (deff === 1)
+                return (bookIdx === books.length - 1) ? books[0].id : books[bookIdx + deff].id;
+            else
+                return (bookIdx === 0) ? books[books.length - 1].id : books[bookIdx + deff].id;
+        })
+}
+
 
 function addBook(book) {
     var bookToSend = {

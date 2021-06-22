@@ -630,9 +630,9 @@ function addBook(book) {
         thumbnail: book.volumeInfo.imageLinks.thumbnail,
         language: book.volumeInfo.language,
         listPrice: book.saleInfo.listPrice || {
-            "amount": 50,
-            "currencyCode": "EUR",
-            "isOnSale": false
+            "amount": utilService.getRandomInt(10, 200),
+            "currencyCode": "USD",
+            "isOnSale": (Math.random() > 0.4) ? false : true
         },
         reviews: []
     }

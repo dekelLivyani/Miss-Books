@@ -5,7 +5,7 @@ import { eventBus } from "../services/event-bus-service.js"
 export default {
     template: `
    <section class="book-google-search">
-      Add book from google: 
+      Add book : 
       <input type="text" v-model="title" placeholder="name of book" list="list">
       <datalist id="list">
          <option>Harry Potter</option>

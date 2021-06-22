@@ -77,6 +77,56 @@ nav a:last-child {
     margin-bottom: 20px;
 }
 
+.book-google-list {
+    position: absolute;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    z-index: 3;
+    background-color: rgb(202, 181, 206);
+    padding: 0;
+}
+
+.book-google-search .close {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    border: 0;
+    background-color: black;
+    font-size: 1rem;
+    padding: 3px 7px;
+    color: wheat;
+}
+
+.book-google-search .search {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    background-color: black;
+    font-size: 1rem;
+    padding: 3px 7px;
+    color: wheat;
+}
+
+.book-google-preview {
+    opacity: 0.9;
+    background-color: rgb(223, 81, 81);
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.book-google-preview .add-book {
+    cursor: pointer;
+    background-color: rgba(49, 49, 49, 0.856);
+    font-size: 1rem;
+    border: 0;
+    padding: 4px;
+    border-radius: 5px;
+}
+
 
 /* filter */
 
@@ -118,6 +168,7 @@ nav a:last-child {
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
 }
@@ -135,6 +186,7 @@ nav a:last-child {
 .book-preview .img-book {
     flex-grow: 1;
     width: 180px;
+    max-height: 240px;
 }
 
 .book-preview .price {
@@ -247,6 +299,9 @@ nav a:last-child {
 .book-details .book-img {
     grid-row: 2/7;
     grid-column: 3/5;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     justify-self: center;
     align-self: flex-end;
 }

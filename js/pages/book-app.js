@@ -6,7 +6,7 @@ export default {
     template: `
     <main>
       <book-filter  @filtered="setFilter"/>
-      <book-google-search/>
+      <book-google-search @bookAdded="renderBooks"/>
       <book-list :books="booksToShow"/>
 </main>
 `,
@@ -22,13 +22,15 @@ export default {
         bookGoogleSearch,
     },
     created() {
-        bookService.query()
-            .then(books => this.books = books)
-
+        this.renderBooks();
     },
     methods: {
         setFilter(filterBy) {
             this.filterBy = filterBy;
+        },
+        renderBooks() {
+            bookService.query()
+                .then(books => this.books = books)
         }
     },
     computed: {

@@ -2,11 +2,14 @@ import { utilService } from './util-service.js';
 import { storageService } from './async-storage-service.js';
 
 const BOOKS_KEY = 'books';
+const SEARCHES = utilService.load('Searches') || {};
 
 export const bookService = {
     query,
     getById,
     addReview,
+    getBooksFromGoogle,
+    addBook,
 };
 
 function query() {
@@ -587,4 +590,38 @@ function addReview(book, review) {
     if (!review.name) review.name = 'Books Reader';
     book.reviews.push(review);
     return storageService.put(BOOKS_KEY, book);
+}
+
+function getBooksFromGoogle(title) {
+    if (SEARCHES[title]) return Promise.resolve(SEARCHES[title]);
+    const URL = `https://www.googleapis.com/books/v1/volumes?printType=books&q=${title}&country=us`
+    return axios.get(URL)
+        .then(res => {
+            console.log('load from axios');
+            SEARCHES[title] = res.data;
+            utilService.save('Searches', SEARCHES)
+            return res.data;
+        })
+        .catch(err => console.log('error:', err))
+}
+
+function addBook(book) {
+    var bookToSend = {
+        title: book.volumeInfo.title,
+        subtitle: book.volumeInfo.subtitle || 'subtitle not exist',
+        authors: book.volumeInfo.authors,
+        publishedDate: book.volumeInfo.publishedDate,
+        description: book.volumeInfo.description,
+        pageCount: book.volumeInfo.pageCount || book.accessInfo.viewability,
+        categories: book.volumeInfo.categories || [],
+        thumbnail: book.volumeInfo.imageLinks.thumbnail,
+        language: book.volumeInfo.language,
+        listPrice: book.saleInfo.listPrice || {
+            "amount": 50,
+            "currencyCode": "EUR",
+            "isOnSale": false
+        },
+        reviews: []
+    }
+    return storageService.post(BOOKS_KEY, bookToSend);
 }

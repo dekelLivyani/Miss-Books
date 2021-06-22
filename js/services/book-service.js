@@ -12,7 +12,7 @@ export const bookService = {
 function query() {
     return storageService.query(BOOKS_KEY)
         .then(books => {
-            if (!books || !books.length) {
+            if (!books.length) {
                 var booksToSave = books = [{
                         "id": "OXeMG8wNskc",
                         "title": "metus hendrerit",
@@ -584,7 +584,6 @@ function getById(id) {
 }
 
 function addReview(book, review) {
-    console.log(book);
     if (!review.name) review.name = 'Books Reader';
     book.reviews.push(review);
     return storageService.put(BOOKS_KEY, book);

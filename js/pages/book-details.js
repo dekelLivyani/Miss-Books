@@ -12,7 +12,7 @@ export default {
         bookReviewsList,
     },
     template: `
-    <div class="book-details" v-if="book">
+    <section class="book-details" v-if="book">
          <p  class="title">{{book.title}} </p>
          <p  class="subtitle-book">{{book.subtitle}} </p>
          <p  class="authors" v-for="(author,idx) in book.authors" :key="idx"><span class="subtitle">Author:</span> {{author}}</p>
@@ -24,9 +24,11 @@ export default {
          <p  class="language"><span class="subtitle">language:</span> {{book.language}} </p>
          <p class="price"><span class="subtitle">Price:</span> 
             <span :class="basedClasses">{{formatCurrency}}</span></p>
+           
             <img class="sale-img" src="imgs/SALE.png" v-if="book.listPrice.isOnSale"/>
             <img class="book-img" :src="book.thumbnail"/>
             <p class="description"><span class="subtitle">Description:</span>
+          
             <book-description :desc="book.description"/> </p>
             <div class="reviews-container">
                <book-review-add v-if="isAddReview" @addReview="addReview" />
@@ -36,7 +38,7 @@ export default {
             <button @click="clickAddReview" v-if="!isAddReview"> Add Review</button>
             <button class="go-back" @click="goBack"> Back</button>
             </div>
-    </div>
+    </section>
   `,
     data() {
         return {

@@ -8,4 +8,5 @@ export default {
        <p class="review-text">   {{review.reviewText}}</p> 
      </div>
  `,
+
 };
